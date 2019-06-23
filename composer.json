@@ -1,0 +1,19 @@
+{
+    "name": "arkadiy/php-project2",
+    "description": "A command-line tool educational project",
+    "keywords": ["gendiff project", "hexlet project"],
+    "type": "project",
+    "bin": [
+      "bin/gendiff"
+    ],
+    "authors": [
+        {
+            "name": "Arkadiy Stepanov",
+            "email": "arkadiy93@hotmail.com"
+        }
+    ],
+    "require": {
+        "docopt/docopt": "^1.0",
+        "squizlabs/php_codesniffer": "*"
+    }
+}

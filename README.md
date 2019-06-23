@@ -1,1 +1,4 @@
-# php-project-lvl2
+# GenDiff
+
+###description
+An educational project for hexlet.
