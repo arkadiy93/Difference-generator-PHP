@@ -3,7 +3,7 @@
     "description": "A command-line tool educational project",
     "keywords": ["gendiff project", "hexlet project"],
     "type": "library",
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "bin": [
       "bin/gendiff"
     ],
