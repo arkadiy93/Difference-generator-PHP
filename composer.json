@@ -3,10 +3,12 @@
     "description": "A command-line tool educational project",
     "keywords": ["gendiff project", "hexlet project"],
     "type": "library",
-    "minimum-stability": "stable",
     "bin": [
       "bin/gendiff"
     ],
+    "scripts": {
+      "phpcs": "phpcs"
+    },
     "authors": [
         {
             "name": "Arkadiy Stepanov",
