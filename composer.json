@@ -9,6 +9,9 @@
     "scripts": {
       "phpcs": "phpcs"
     },
+    "autoload": {
+        "files": ["src/index.php"]
+    },
     "authors": [
         {
             "name": "Arkadiy Stepanov",
@@ -17,6 +20,11 @@
     ],
     "require": {
         "docopt/docopt": "^1.0",
+        "phpunit/phpunit": "^7.5",
+        "funct/funct": "^1.5",
+        "tightenco/collect": "^5.8"
+    },
+    "require-dev": {
         "squizlabs/php_codesniffer": "*"
     }
 }
