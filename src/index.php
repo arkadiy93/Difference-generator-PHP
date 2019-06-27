@@ -2,11 +2,32 @@
 
 namespace Gendiff\index;
 
-use Funct;
+use Symfony\Component\Yaml\Yaml;
+use function Funct\Collection\last;
+use function Funct\Collection\union;
+
+function getFileExtension($file)
+{
+    return last(explode(".", $file));
+}
+
+function getParsingMethod($extension)
+{
+    $parsers = [
+      "json" => function ($pathToFile) {
+        $fileContent = file_get_contents($pathToFile);
+        return json_decode($fileContent, true);
+      },
+      "yml" => function ($pathToFile) {
+        return Yaml::parseFile($pathToFile);
+      }
+    ];
+    return $parsers[$extension];
+}
 
 function getDataStatus($data1, $data2)
 {
-    $mergedData = Funct\Collection\union(array_keys($data1), array_keys($data2));
+    $mergedData = union(array_keys($data1), array_keys($data2));
     $result = [];
     foreach ($mergedData as $key) {
         if (!array_key_exists($key, $data2)) {
@@ -44,12 +65,12 @@ function parse($dataStatus, $data1, $data2)
     return "{\n$connectedResult\n}";
 }
 
-function getDiff($firstFilePath, $secondFilePath)
+function genDiff($firstFilePath, $secondFilePath)
 {
-    $firstFile = file_get_contents($firstFilePath);
-    $firstData = json_decode($firstFile, true);
-    $secondFile = file_get_contents($secondFilePath);
-    $secondData = json_decode($secondFile, true);
+    $extension = getFileExtension($firstFilePath);
+    $parse = getParsingMethod($extension);
+    $firstData = $parse($firstFilePath);
+    $secondData = $parse($secondFilePath);
     $dataStatus = getDataStatus($firstData, $secondData);
     $parsedData = parse($dataStatus, $firstData, $secondData);
     return $parsedData;

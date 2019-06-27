@@ -22,7 +22,8 @@
         "docopt/docopt": "^1.0",
         "phpunit/phpunit": "^7.5",
         "funct/funct": "^1.5",
-        "tightenco/collect": "^5.8"
+        "tightenco/collect": "^5.8",
+        "symfony/yaml": "^4.3"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "*"
