@@ -43,7 +43,7 @@ function parse($dataStatus, $data1, $data2)
     return "{\n$result\n}";
 }
 
-function generate($args)
+function genDiff($args)
 {
     ["<firstFile>" => $firstFilePath, "<secondFile>" => $secondFilePath] = $args;
     $firstFile = file_get_contents($firstFilePath);

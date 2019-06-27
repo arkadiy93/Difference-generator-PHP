@@ -2,7 +2,7 @@
 
 <?php
 
-use function Gendiff\index\generate;
+use function Gendiff\index\genDiff;
 
 $autoloadPath1 = __DIR__ . '/../../../autoload.php';
 $autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
@@ -26,6 +26,5 @@ Options:
 DOC;
 
 $args = Docopt::handle(DOC);
-$diffData = generate($args);
-var_dump($diffData);
-return $diffData;
+$diffData = genDiff($args);
+echo $diffData;
