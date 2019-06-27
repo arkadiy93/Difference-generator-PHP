@@ -43,9 +43,8 @@ function parse($dataStatus, $data1, $data2)
     return "{\n$result\n}";
 }
 
-function genDiff($args)
+function genDiff($firstFilePath, $secondFilePath)
 {
-    ["<firstFile>" => $firstFilePath, "<secondFile>" => $secondFilePath] = $args;
     $firstFile = file_get_contents($firstFilePath);
     $firstData = json_decode($firstFile, true);
     $secondFile = file_get_contents($secondFilePath);
