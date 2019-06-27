@@ -22,28 +22,29 @@ function getDataStatus($data1, $data2)
 
 function parse($dataStatus, $data1, $data2)
 {
-    $result = "";
+    $result = [];
     foreach ($dataStatus as $value => $key) {
         if ($key === "unchanged") {
             $dataValue = var_export($data1[$value], true);
-            $result = $result . "    $value: $dataValue\n";
+            $result[] = "    $value: $dataValue";
         } elseif ($key === "deleted") {
             $dataValue = var_export($data1[$value], true);
-            $result = $result . "  - $value: $dataValue\n";
+            $result[] = "  - $value: $dataValue";
         } elseif ($key === "added") {
             $dataValue = var_export($data2[$value], true);
-            $result = $result . "  + $value: $dataValue\n";
+            $result[] = "  + $value: $dataValue";
         } else {
             $beforeValue = var_export($data1[$value], true);
             $afterValue = var_export($data2[$value], true);
-            $result = $result . "  - $value: $beforeValue\n";
-            $result = $result . "  + $value: $afterValue\n";
+            $result[] = "  - $value: $beforeValue";
+            $result[] = "  + $value: $afterValue";
         }
     }
-    return "{\n$result\n}";
+    $connectedResult = implode("\n", $result);
+    return "{\n$connectedResult\n}";
 }
 
-function genDiff($firstFilePath, $secondFilePath)
+function getDiff($firstFilePath, $secondFilePath)
 {
     $firstFile = file_get_contents($firstFilePath);
     $firstData = json_decode($firstFile, true);
