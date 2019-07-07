@@ -1,25 +1,49 @@
 <?php namespace Gendiff\renders\flatRender;
 
-function render($dataStatus, $data1, $data2)
+use function Funct\Collection\flatten;
+
+DEFINE(SPACES_AMOUNT, 2);
+
+function getRenderMethod($elementType)
 {
-    $result = [];
-    foreach ($dataStatus as $value => $key) {
-        if ($key === "unchanged") {
-            $dataValue = var_export($data1[$value], true);
-            $result[] = "    $value: $dataValue";
-        } elseif ($key === "deleted") {
-            $dataValue = var_export($data1[$value], true);
-            $result[] = "  - $value: $dataValue";
-        } elseif ($key === "added") {
-            $dataValue = var_export($data2[$value], true);
-            $result[] = "  + $value: $dataValue";
-        } else {
-            $beforeValue = var_export($data1[$value], true);
-            $afterValue = var_export($data2[$value], true);
-            $result[] = "  - $value: $beforeValue";
-            $result[] = "  + $value: $afterValue";
-        }
-    }
-    $connectedResult = implode("\n", $result);
+    $typeMethods = [
+        "added" => function ($el) {
+            ["key" => $key, "value" => $value] = $el;
+            $spaces = str_repeat(" ", SPACES_AMOUNT);
+            $stringValue = var_export($value, true);
+            return "$spaces+ $key: $stringValue";
+        },
+        "removed" => function ($el) {
+            ["key" => $key, "value" => $value] = $el;
+            $spaces = str_repeat(" ", SPACES_AMOUNT);
+            $stringValue = var_export($value, true);
+            return "$spaces- $key: $stringValue";
+        },
+        "unchanged" => function ($el) {
+            ["key" => $key, "value" => $value] = $el;
+            $spaces = str_repeat(" ", SPACES_AMOUNT);
+            $stringValue = var_export($value, true);
+            return "$spaces  $key: $stringValue";
+        },
+        "changed" => function ($el) {
+            ["key" => $key, "value" => $value, "oldValue" => $oldValue] = $el;
+            $spaces = str_repeat(" ", SPACES_AMOUNT);
+            $stringValue = var_export($value, true);
+            $oldStringValue = var_export($oldValue, true);
+            return ["$spaces+ $key: $stringValue", "$spaces- $key: $oldStringValue"];
+        },
+    ];
+    return $typeMethods[$elementType];
+}
+
+function render($ast)
+{
+    $astArray = array_map(function ($el) {
+        $runProperRenderer = getRenderMethod($el["type"]);
+        return $runProperRenderer($el);
+    }, $ast);
+
+    $flattenedAst = flatten($astArray);
+    $connectedResult = implode("\n", $flattenedAst);
     return "{\n$connectedResult\n}";
 }

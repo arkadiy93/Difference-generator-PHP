@@ -16,6 +16,7 @@
           "src/renders/flatRender.php",
           "src/renders/deepRender.php",
           "src/renders/plainRender.php",
+          "src/renders/jsonRender.php",
           "src/renders/index.php"
         ]
     },
