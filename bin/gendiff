@@ -26,6 +26,6 @@ Options:
 DOC;
 
 $args = Docopt::handle(DOC);
-["<firstFile>" => $firstFilePath, "<secondFile>" => $secondFilePath] = $args;
-$diffData = genDiff($firstFilePath, $secondFilePath);
+["<firstFile>" => $firstFilePath, "<secondFile>" => $secondFilePath, "--format" => $format] = $args;
+$diffData = genDiff($firstFilePath, $secondFilePath, $format);
 echo $diffData;

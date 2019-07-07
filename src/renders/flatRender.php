@@ -1,6 +1,4 @@
-<?php
-
-namespace Gendiff\renders\flatRender;
+<?php namespace Gendiff\renders\flatRender;
 
 function render($dataStatus, $data1, $data2)
 {

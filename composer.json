@@ -4,13 +4,20 @@
     "keywords": ["gendiff project", "hexlet project"],
     "type": "library",
     "bin": [
-      "bin/gendiff"
+        "bin/gendiff"
     ],
     "scripts": {
-      "phpcs": "phpcs"
+        "phpcs": "phpcs"
     },
     "autoload": {
-        "files": ["src/index.php"]
+        "files": [
+          "src/index.php",
+          "src/parsers.php",
+          "src/renders/flatRender.php",
+          "src/renders/deepRender.php",
+          "src/renders/plainRender.php",
+          "src/renders/index.php"
+        ]
     },
     "authors": [
         {
