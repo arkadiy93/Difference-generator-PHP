@@ -7,13 +7,15 @@ function toString($value, $spacesAmount)
     $stringTypes = [
       "array" => function ($el) use ($spacesAmount) {
           $keys = array_keys($el);
-          $elementSpacing = str_repeat(" ", $spacesAmount + 4);
+          $innerSpace = 6;
+          $clossingSpace = 2;
+          $elementSpacing = str_repeat(" ", $spacesAmount + $innerSpace);
+          $closingBracketSpace = str_repeat(" ", $spacesAmount + $clossingSpace);
           $lines = array_map(function ($key) use ($el, $elementSpacing) {
             $value = is_bool($el[$key]) ? var_export($el[$key], true) : $el[$key];
             return "$elementSpacing$key: $value";
           }, $keys);
           $oneLine = implode("\n", $lines);
-          $closingBracketSpace = str_repeat(" ", $spacesAmount + 2);
           return "{\n$oneLine\n$closingBracketSpace}";
       },
       "default" => function ($value) {

@@ -21,5 +21,11 @@ function getRenderMethod($renderType)
             return flatRendering($ast);
         }
     ];
-    return $renderers[$renderType];
+    $renderFun = $renderers[$renderType];
+
+    if (!$renderFun) {
+        throw new \Exception("Format '$renderType' is not supported");
+    }
+
+    return $renderFun;
 }

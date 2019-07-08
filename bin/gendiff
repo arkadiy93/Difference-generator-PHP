@@ -28,4 +28,4 @@ DOC;
 $args = Docopt::handle(DOC);
 ["<firstFile>" => $firstFilePath, "<secondFile>" => $secondFilePath, "--format" => $format] = $args;
 $diffData = genDiff($firstFilePath, $secondFilePath, $format);
-echo $diffData;
+echo $diffData . PHP_EOL;

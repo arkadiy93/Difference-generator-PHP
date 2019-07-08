@@ -1,5 +1,7 @@
 <?php namespace Gendiff\parsers;
 
+use Symfony\Component\Yaml\Yaml;
+
 function getParsingMethod($extension)
 {
     $parsers = [

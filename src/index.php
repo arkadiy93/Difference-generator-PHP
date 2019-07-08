@@ -1,6 +1,5 @@
 <?php namespace Gendiff\index;
 
-use Symfony\Component\Yaml\Yaml;
 use Funct\Collection;
 
 use function Gendiff\parsers\getParsingMethod;
