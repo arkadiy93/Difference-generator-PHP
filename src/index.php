@@ -15,6 +15,7 @@ function getAst($firstData, $secondData)
     $keys1 = array_keys($firstData);
     $keys2 = array_keys($secondData);
     $allKeys = Collection\union($keys1, $keys2);
+    var_dump($allKeys);
     $ast = array_map(function ($key) use ($firstData, $secondData) {
         if (is_array($firstData[$key]) && is_array($secondData[$key])) {
             return [
@@ -57,9 +58,9 @@ function genDiff($firstFilePath, $secondFilePath, $format = "pretty")
 {
     $extension = getFileExtension($firstFilePath);
     $parse = getParsingMethod($extension);
-    $firstData = $parse($firstFilePath);
-    $secondData = $parse($secondFilePath);
-    $ast = getAst($firstData, $secondData);
+    $firstConfig = $parse($firstFilePath);
+    $secondConfig = $parse($secondFilePath);
+    $ast = getAst($firstConfig, $secondConfig);
     $render = getRenderMethod($format);
     return $render($ast);
 }
