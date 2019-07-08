@@ -8,7 +8,7 @@
     ],
     "scripts": {
         "phpcs": "phpcs",
-        "phpunit": "phpunit"
+        "phpunit": "phpunit --configuration phpunit.xml"
     },
     "autoload": {
         "files": [

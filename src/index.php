@@ -15,7 +15,6 @@ function getAst($firstData, $secondData)
     $keys1 = array_keys($firstData);
     $keys2 = array_keys($secondData);
     $allKeys = Collection\union($keys1, $keys2);
-    var_dump($allKeys);
     $ast = array_map(function ($key) use ($firstData, $secondData) {
         if (is_array($firstData[$key]) && is_array($secondData[$key])) {
             return [
