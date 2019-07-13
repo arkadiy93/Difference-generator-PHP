@@ -5,22 +5,22 @@ use function Gendiff\index\genDiff;
 
 class YamlRenderTest extends TestCase
 {
-    protected static $beforePath;
-    protected static $afterPath;
-    protected static $correctSolution;
+    protected $beforePath;
+    protected $afterPath;
+    protected $correctSolution;
 
-    public static function setUpBeforeClass()
+    protected function setUp()
     {
-        self::$beforePath = __DIR__ . "/__fixtures__/flat/before.yml";
-        self::$afterPath = __DIR__ . "/__fixtures__/flat/after.yml";
+        $this->beforePath = __DIR__ . "/__fixtures__/flat/before.yml";
+        $this->afterPath = __DIR__ . "/__fixtures__/flat/after.yml";
         $correctSolutionPath = __DIR__ . "/__fixtures__/solutions/flatSolution.txt";
         $solutionContent = file_get_contents($correctSolutionPath);
-        self::$correctSolution = trim($solutionContent);
+        $this->correctSolution = trim($solutionContent);
     }
 
     public function testRender()
     {
-        $gendiffResult = genDiff(self::$beforePath, self::$afterPath);
-        $this->assertSame($gendiffResult, self::$correctSolution);
+        $gendiffResult = genDiff($this->beforePath, $this->afterPath);
+        $this->assertSame($gendiffResult, $this->correctSolution);
     }
 }
