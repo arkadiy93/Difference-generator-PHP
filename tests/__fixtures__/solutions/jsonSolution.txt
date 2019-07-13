@@ -1,1 +1,73 @@
-[{"type":"nested","key":"common","children":[{"type":"unchanged","value":"Value 1","key":"setting1"},{"type":"removed","value":"200","key":"setting2"},{"type":"unchanged","value":true,"key":"setting3"},{"type":"removed","value":{"key":"value"},"key":"setting6"},{"type":"added","value":"blah blah","key":"setting4"},{"type":"added","value":{"key5":"value5"},"key":"setting5"}]},{"type":"nested","key":"group1","children":[{"type":"changed","value":"bars","oldValue":"bas","key":"baz"},{"type":"unchanged","value":"bar","key":"foo"}]},{"type":"removed","value":{"abc":"12345"},"key":"group2"},{"type":"added","value":{"fee":"100500"},"key":"group3"}]
+[
+    {
+        "type": "nested",
+        "key": "common",
+        "children": [
+            {
+                "type": "unchanged",
+                "value": "Value 1",
+                "key": "setting1"
+            },
+            {
+                "type": "removed",
+                "value": "200",
+                "key": "setting2"
+            },
+            {
+                "type": "unchanged",
+                "value": true,
+                "key": "setting3"
+            },
+            {
+                "type": "removed",
+                "value": {
+                    "key": "value"
+                },
+                "key": "setting6"
+            },
+            {
+                "type": "added",
+                "value": "blah blah",
+                "key": "setting4"
+            },
+            {
+                "type": "added",
+                "value": {
+                    "key5": "value5"
+                },
+                "key": "setting5"
+            }
+        ]
+    },
+    {
+        "type": "nested",
+        "key": "group1",
+        "children": [
+            {
+                "type": "changed",
+                "value": "bars",
+                "oldValue": "bas",
+                "key": "baz"
+            },
+            {
+                "type": "unchanged",
+                "value": "bar",
+                "key": "foo"
+            }
+        ]
+    },
+    {
+        "type": "removed",
+        "value": {
+            "abc": "12345"
+        },
+        "key": "group2"
+    },
+    {
+        "type": "added",
+        "value": {
+            "fee": "100500"
+        },
+        "key": "group3"
+    }
+]

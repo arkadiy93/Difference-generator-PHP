@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "275b99529138e264673e44ae1f84535d",
+    "content-hash": "fa67ef1fe6732c0d56febd9776a744a0",
     "packages": [
         {
             "name": "docopt/docopt",
@@ -1772,16 +1772,16 @@
         },
         {
             "name": "tightenco/collect",
-            "version": "v5.8.27",
+            "version": "v5.8.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tightenco/collect.git",
-                "reference": "fb65593a48518115b3026e2a6e665bb6c3584842"
+                "reference": "6e19a825908ceacf06e1ce2fc43c7e34427756bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tightenco/collect/zipball/fb65593a48518115b3026e2a6e665bb6c3584842",
-                "reference": "fb65593a48518115b3026e2a6e665bb6c3584842",
+                "url": "https://api.github.com/repos/tightenco/collect/zipball/6e19a825908ceacf06e1ce2fc43c7e34427756bf",
+                "reference": "6e19a825908ceacf06e1ce2fc43c7e34427756bf",
                 "shasum": ""
             },
             "require": {
@@ -1818,7 +1818,7 @@
                 "collection",
                 "laravel"
             ],
-            "time": "2019-06-25T20:30:13+00:00"
+            "time": "2019-07-10T19:09:53+00:00"
         },
         {
             "name": "webmozart/assert",

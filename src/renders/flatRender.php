@@ -2,8 +2,6 @@
 
 use function Funct\Collection\flatten;
 
-//DEFINE(SPACES_AMOUNT, 2);
-
 function getRenderMethod($elementType)
 {
     $typeMethods = [

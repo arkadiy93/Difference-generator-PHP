@@ -15,5 +15,5 @@ function normalize($arr)
 function render($ast)
 {
     $normalizedAst = normalize($ast);
-    return json_encode($normalizedAst);
+    return json_encode($normalizedAst, JSON_PRETTY_PRINT);
 }
