@@ -36,7 +36,8 @@
         "phpunit/phpunit": "^7.5",
         "funct/funct": "^1.5",
         "tightenco/collect": "^5.8",
-        "symfony/yaml": "^4.3"
+        "symfony/yaml": "^4.3",
+        "arkadiy/php-project2": "^0.1.2"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "*"

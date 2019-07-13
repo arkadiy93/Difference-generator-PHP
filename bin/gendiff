@@ -29,3 +29,6 @@ $args = Docopt::handle(DOC);
 ["<firstFile>" => $firstFilePath, "<secondFile>" => $secondFilePath, "--format" => $format] = $args;
 $diffData = genDiff($firstFilePath, $secondFilePath, $format);
 echo $diffData . PHP_EOL;
+
+// Запись ментору, по какой то причине, не проходят тесты на travis. Можно посдказку в чем может быть дело и куда дальше двигаться?
+// Travis запускает ту же версию php что и у меня локально. Написал в слаке в #php но так и не смогли решить проблему
