@@ -16,7 +16,9 @@ function getAst($firstData, $secondData)
     $keys2 = array_keys($secondData);
     $allKeys = Collection\union($keys1, $keys2);
     $ast = array_map(function ($key) use ($firstData, $secondData) {
-        if (is_array($firstData[$key]) && is_array($secondData[$key])) {
+        $firstCondition = isset($firstData[$key]) && is_array($firstData[$key]);
+        $secondCondition = isset($secondData[$key]) && is_array($secondData[$key]);
+        if ($firstCondition && $secondCondition) {
             return [
             "type" => "nested",
             "key" => $key,
