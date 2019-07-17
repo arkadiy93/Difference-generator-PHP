@@ -2,7 +2,7 @@
 
 use function Funct\Collection\flatten;
 
-DEFINE(ELEMENTS_SPACING, 2);
+DEFINE("ELEMENTS_SPACING", 2);
 
 function getRenderMethod($elementType)
 {
