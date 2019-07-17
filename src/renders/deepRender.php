@@ -2,15 +2,16 @@
 
 use Funct\Collection;
 
+DEFINE("COMPLEX_VALUE_SPACE", 6);
+DEFINE("CLOSING_SPACE", 2);
+
 function toString($value, $spacesAmount)
 {
     $stringTypes = [
       "array" => function ($el) use ($spacesAmount) {
           $keys = array_keys($el);
-          $innerSpace = 6;
-          $clossingSpace = 2;
-          $elementSpacing = str_repeat(" ", $spacesAmount + $innerSpace);
-          $closingBracketSpace = str_repeat(" ", $spacesAmount + $clossingSpace);
+          $elementSpacing = str_repeat(" ", $spacesAmount + COMPLEX_VALUE_SPACE);
+          $closingBracketSpace = str_repeat(" ", $spacesAmount + CLOSING_SPACE);
           $lines = array_map(function ($key) use ($el, $elementSpacing) {
             $value = is_bool($el[$key]) ? var_export($el[$key], true) : $el[$key];
             return "$elementSpacing$key: $value";
@@ -74,6 +75,6 @@ function render($ast, $spacesAmount = 2)
     }, $ast);
     $flattenedAst = Collection\flatten($astArray);
     $stringAst = implode("\n", $flattenedAst);
-    $closingBracketSpace = str_repeat(" ", $spacesAmount - 2);
+    $closingBracketSpace = str_repeat(" ", $spacesAmount - CLOSING_SPACE);
     return "{\n$stringAst\n$closingBracketSpace}";
 }
