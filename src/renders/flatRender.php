@@ -8,13 +8,13 @@ function getRenderMethod($elementType)
 {
     $typeMethods = [
         "added" => function ($el) {
-            ["key" => $key, "value" => $value] = $el;
+            ["key" => $key, "newValue" => $value] = $el;
             $spaces = str_repeat(" ", ELEMENTS_SPACING);
             $stringValue = var_export($value, true);
             return "$spaces+ $key: $stringValue";
         },
         "removed" => function ($el) {
-            ["key" => $key, "value" => $value] = $el;
+            ["key" => $key, "oldValue" => $value] = $el;
             $spaces = str_repeat(" ", ELEMENTS_SPACING);
             $stringValue = var_export($value, true);
             return "$spaces- $key: $stringValue";
@@ -26,11 +26,11 @@ function getRenderMethod($elementType)
             return "$spaces  $key: $stringValue";
         },
         "changed" => function ($el) {
-            ["key" => $key, "value" => $value, "oldValue" => $oldValue] = $el;
+            ["key" => $key, "newValue" => $newValue, "oldValue" => $oldValue] = $el;
             $spaces = str_repeat(" ", ELEMENTS_SPACING);
-            $stringValue = var_export($value, true);
+            $newStringValue = var_export($newValue, true);
             $oldStringValue = var_export($oldValue, true);
-            return ["$spaces+ $key: $stringValue", "$spaces- $key: $oldStringValue"];
+            return ["$spaces+ $key: $newStringValue", "$spaces- $key: $oldStringValue"];
         },
     ];
     return $typeMethods[$elementType];

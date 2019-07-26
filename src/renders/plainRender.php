@@ -32,22 +32,22 @@ function getRenderMethod($elementType)
             return "hello";
         },
         "added" => function ($el, $path, $renderFunc) {
-            ["key" => $key, "value" => $value] = $el;
+            ["key" => $key, "newValue" => $value] = $el;
             $propertyPath = getPathString($path, $key);
             $propertyValue = toString($value);
             return "Property '$propertyPath' was added with value: '$propertyValue'";
         },
         "removed" => function ($el, $path, $renderFunc) {
-            ["key" => $key, "value" => $value] = $el;
+            ["key" => $key, "oldValue" => $value] = $el;
             $propertyPath = getPathString($path, $key);
             return "Property '$propertyPath' was removed";
         },
         "changed" => function ($el, $path, $renderFunc) {
-            ["key" => $key, "value" => $value, "oldValue" => $oldValue] = $el;
+            ["key" => $key, "newValue" => $newValue, "oldValue" => $oldValue] = $el;
             $propertyPath = getPathString($path, $key);
-            $propertyValue = toString($value);
+            $newPropertyValue = toString($newValue);
             $oldPropertyValue = toString($oldValue);
-            return "Property '$propertyPath' was changed. From '$oldPropertyValue' to '$propertyValue'";
+            return "Property '$propertyPath' was changed. From '$oldPropertyValue' to '$newPropertyValue'";
         },
     ];
     return $typeMethods[$elementType];

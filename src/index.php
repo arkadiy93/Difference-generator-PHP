@@ -20,34 +20,34 @@ function getAst($firstData, $secondData)
         $secondCondition = isset($secondData[$key]) && is_array($secondData[$key]);
         if ($firstCondition && $secondCondition) {
             return [
-            "type" => "nested",
-            "key" => $key,
-            "children" => getAst($firstData[$key], $secondData[$key])
+                "type" => "nested",
+                "key" => $key,
+                "children" => getAst($firstData[$key], $secondData[$key])
             ];
         } elseif (!array_key_exists($key, $firstData)) {
             return [
-            "type" => "added",
-            "value" => $secondData[$key],
-            "key" => $key,
+                "type" => "added",
+                "newValue" => $secondData[$key],
+                "key" => $key,
             ];
         } elseif (!array_key_exists($key, $secondData)) {
             return [
-            "type" => "removed",
-            "value" => $firstData[$key],
-            "key" => $key,
+                "type" => "removed",
+                "oldValue" => $firstData[$key],
+                "key" => $key,
             ];
         } elseif ($firstData[$key] === $secondData[$key]) {
             return [
-              "type" => "unchanged",
-              "value" => $firstData[$key],
-              "key" => $key
+                "type" => "unchanged",
+                "value" => $firstData[$key],
+                "key" => $key
             ];
         } else {
             return [
-            "type" => "changed",
-            "value" => $secondData[$key],
-            "oldValue" => $firstData[$key],
-            "key" => $key
+                "type" => "changed",
+                "newValue" => $secondData[$key],
+                "oldValue" => $firstData[$key],
+                "key" => $key
             ];
         }
     }, $allKeys);
@@ -59,9 +59,11 @@ function genDiff($firstFilePath, $secondFilePath, $format = "pretty")
 {
     $extension = getFileExtension($firstFilePath);
     $parse = getParsingMethod($extension);
-    $firstConfig = $parse($firstFilePath);
-    $secondConfig = $parse($secondFilePath);
-    $ast = getAst($firstConfig, $secondConfig);
+    $firstFileContent = file_get_contents($firstFilePath);
+    $secondFileContent = file_get_contents($secondFilePath);
+    $firstData = $parse($firstFileContent);
+    $secondData = $parse($secondFileContent);
+    $ast = getAst($firstData, $secondData);
     $render = getRenderMethod($format);
     return $render($ast);
 }

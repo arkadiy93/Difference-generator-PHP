@@ -10,7 +10,7 @@
             },
             {
                 "type": "removed",
-                "value": "200",
+                "oldValue": "200",
                 "key": "setting2"
             },
             {
@@ -20,19 +20,19 @@
             },
             {
                 "type": "removed",
-                "value": {
+                "oldValue": {
                     "key": "value"
                 },
                 "key": "setting6"
             },
             {
                 "type": "added",
-                "value": "blah blah",
+                "newValue": "blah blah",
                 "key": "setting4"
             },
             {
                 "type": "added",
-                "value": {
+                "newValue": {
                     "key5": "value5"
                 },
                 "key": "setting5"
@@ -45,7 +45,7 @@
         "children": [
             {
                 "type": "changed",
-                "value": "bars",
+                "newValue": "bars",
                 "oldValue": "bas",
                 "key": "baz"
             },
@@ -58,14 +58,14 @@
     },
     {
         "type": "removed",
-        "value": {
+        "oldValue": {
             "abc": "12345"
         },
         "key": "group2"
     },
     {
         "type": "added",
-        "value": {
+        "newValue": {
             "fee": "100500"
         },
         "key": "group3"

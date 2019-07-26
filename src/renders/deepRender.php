@@ -37,13 +37,13 @@ function getRenderMethod($elementType)
             return "$spaces  $key: $stringValue";
         },
         "added" => function ($el, $spacesAmount, $renderFunc) {
-            ["key" => $key, "value" => $value] = $el;
+            ["key" => $key, "newValue" => $value] = $el;
             $spaces = str_repeat(" ", $spacesAmount);
             $stringValue = toString($value, $spacesAmount);
             return "$spaces+ $key: $stringValue";
         },
         "removed" => function ($el, $spacesAmount, $renderFunc) {
-            ["key" => $key, "value" => $value] = $el;
+            ["key" => $key, "oldValue" => $value] = $el;
             $spaces = str_repeat(" ", $spacesAmount);
             $stringValue = toString($value, $spacesAmount);
             return "$spaces- $key: $stringValue";
@@ -55,11 +55,11 @@ function getRenderMethod($elementType)
             return "$spaces  $key: $stringValue";
         },
         "changed" => function ($el, $spacesAmount, $renderFunc) {
-            ["key" => $key, "value" => $value, "oldValue" => $oldValue] = $el;
+            ["key" => $key, "newValue" => $newValue, "oldValue" => $oldValue] = $el;
             $spaces = str_repeat(" ", $spacesAmount);
-            $stringValue = toString($value, $spacesAmount);
+            $stringNewValue = toString($newValue, $spacesAmount);
             $stringOldValue = toString($oldValue, $spacesAmount);
-            return ["$spaces+ $key: $stringValue", "$spaces- $key: $oldValue"];
+            return ["$spaces+ $key: $stringNewValue", "$spaces- $key: $oldValue"];
         },
     ];
     return $typeMethods[$elementType];
