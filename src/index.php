@@ -18,38 +18,40 @@ function getAst($firstData, $secondData)
     $ast = array_map(function ($key) use ($firstData, $secondData) {
         $firstCondition = isset($firstData[$key]) && is_array($firstData[$key]);
         $secondCondition = isset($secondData[$key]) && is_array($secondData[$key]);
+        $currentNode = [];
         if ($firstCondition && $secondCondition) {
-            return [
+            $currentNode = [
                 "type" => "nested",
                 "key" => $key,
                 "children" => getAst($firstData[$key], $secondData[$key])
             ];
         } elseif (!array_key_exists($key, $firstData)) {
-            return [
+            $currentNode = [
                 "type" => "added",
                 "newValue" => $secondData[$key],
                 "key" => $key,
             ];
         } elseif (!array_key_exists($key, $secondData)) {
-            return [
+            $currentNode = [
                 "type" => "removed",
                 "oldValue" => $firstData[$key],
                 "key" => $key,
             ];
         } elseif ($firstData[$key] === $secondData[$key]) {
-            return [
+            $currentNode = [
                 "type" => "unchanged",
                 "value" => $firstData[$key],
                 "key" => $key
             ];
         } else {
-            return [
+            $currentNode = [
                 "type" => "changed",
                 "newValue" => $secondData[$key],
                 "oldValue" => $firstData[$key],
                 "key" => $key
             ];
         }
+        return $currentNode;
     }, $allKeys);
 
     return $ast;
