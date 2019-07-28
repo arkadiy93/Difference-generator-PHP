@@ -5,12 +5,12 @@ use Funct\Collection;
 function toString($value)
 {
     $stringTypes = [
-      "array" => function ($el) {
-          return "complex value";
-      },
-      "default" => function ($value) {
-        return is_bool($value) ? var_export($value, true) : $value;
-      }
+        "array" => function ($el) {
+            return "complex value";
+        },
+        "default" => function ($value) {
+            return is_bool($value) ? var_export($value, true) : $value;
+        }
     ];
 
     return is_array($value) ? $stringTypes["array"]($value) : $stringTypes["default"]($value);

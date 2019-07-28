@@ -8,20 +8,20 @@ DEFINE("CLOSING_SPACE", 2);
 function toString($value, $spacesAmount)
 {
     $stringTypes = [
-      "array" => function ($el) use ($spacesAmount) {
-          $keys = array_keys($el);
-          $elementSpacing = str_repeat(" ", $spacesAmount + COMPLEX_VALUE_SPACE);
-          $closingBracketSpace = str_repeat(" ", $spacesAmount + CLOSING_SPACE);
-          $lines = array_map(function ($key) use ($el, $elementSpacing) {
-            $value = is_bool($el[$key]) ? var_export($el[$key], true) : $el[$key];
-            return "$elementSpacing$key: $value";
-          }, $keys);
-          $oneLine = implode("\n", $lines);
-          return "{\n$oneLine\n$closingBracketSpace}";
-      },
-      "default" => function ($value) {
-        return is_bool($value) ? var_export($value, true) : $value;
-      }
+        "array" => function ($el) use ($spacesAmount) {
+            $keys = array_keys($el);
+            $elementSpacing = str_repeat(" ", $spacesAmount + COMPLEX_VALUE_SPACE);
+            $closingBracketSpace = str_repeat(" ", $spacesAmount + CLOSING_SPACE);
+            $lines = array_map(function ($key) use ($el, $elementSpacing) {
+                $value = is_bool($el[$key]) ? var_export($el[$key], true) : $el[$key];
+                return "$elementSpacing$key: $value";
+            }, $keys);
+            $oneLine = implode("\n", $lines);
+            return "{\n$oneLine\n$closingBracketSpace}";
+        },
+        "default" => function ($value) {
+            return is_bool($value) ? var_export($value, true) : $value;
+        }
     ];
 
     return is_array($value) ? $stringTypes["array"]($value) : $stringTypes["default"]($value);
