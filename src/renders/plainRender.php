@@ -31,18 +31,18 @@ function getRenderMethod($elementType)
             return $renderFunc($children, $path);
             return "hello";
         },
-        "added" => function ($el, $path, $renderFunc) {
+        "added" => function ($el, $path) {
             ["key" => $key, "newValue" => $value] = $el;
             $propertyPath = getPathString($path, $key);
             $propertyValue = toString($value);
             return "Property '$propertyPath' was added with value: '$propertyValue'";
         },
-        "removed" => function ($el, $path, $renderFunc) {
-            ["key" => $key, "oldValue" => $value] = $el;
+        "removed" => function ($el, $path) {
+            ["key" => $key] = $el;
             $propertyPath = getPathString($path, $key);
             return "Property '$propertyPath' was removed";
         },
-        "changed" => function ($el, $path, $renderFunc) {
+        "changed" => function ($el, $path) {
             ["key" => $key, "newValue" => $newValue, "oldValue" => $oldValue] = $el;
             $propertyPath = getPathString($path, $key);
             $newPropertyValue = toString($newValue);

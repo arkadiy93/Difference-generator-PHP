@@ -2,29 +2,30 @@
 
 use Funct\Collection;
 
-DEFINE("COMPLEX_VALUE_SPACE", 6);
-DEFINE("CLOSING_SPACE", 2);
+const COMPLEX_VALUE_SPACE =  6;
+const CLOSING_SPACE = 2;
+
+function complexValueToString($value, $spacesAmount)
+{
+    $keys = array_keys($value);
+    $elementSpacing = str_repeat(" ", $spacesAmount + COMPLEX_VALUE_SPACE);
+    $closingBracketSpace = str_repeat(" ", $spacesAmount + CLOSING_SPACE);
+    $lines = array_map(function ($key) use ($value, $elementSpacing) {
+        $value = is_bool($value[$key]) ? var_export($value[$key], true) : $value[$key];
+        return "$elementSpacing$key: $value";
+    }, $keys);
+    $oneLine = implode("\n", $lines);
+    return "{\n$oneLine\n$closingBracketSpace}";
+}
+
+function defaultValueToString($value)
+{
+    return is_bool($value) ? var_export($value, true) : $value;
+}
 
 function toString($value, $spacesAmount)
 {
-    $stringTypes = [
-        "array" => function ($el) use ($spacesAmount) {
-            $keys = array_keys($el);
-            $elementSpacing = str_repeat(" ", $spacesAmount + COMPLEX_VALUE_SPACE);
-            $closingBracketSpace = str_repeat(" ", $spacesAmount + CLOSING_SPACE);
-            $lines = array_map(function ($key) use ($el, $elementSpacing) {
-                $value = is_bool($el[$key]) ? var_export($el[$key], true) : $el[$key];
-                return "$elementSpacing$key: $value";
-            }, $keys);
-            $oneLine = implode("\n", $lines);
-            return "{\n$oneLine\n$closingBracketSpace}";
-        },
-        "default" => function ($value) {
-            return is_bool($value) ? var_export($value, true) : $value;
-        }
-    ];
-
-    return is_array($value) ? $stringTypes["array"]($value) : $stringTypes["default"]($value);
+    return is_array($value) ? complexValueToString($value, $spacesAmount) : defaultValueToString($value);
 }
 
 function getRenderMethod($elementType)
@@ -36,30 +37,30 @@ function getRenderMethod($elementType)
             $spaces = str_repeat(" ", $spacesAmount);
             return "$spaces  $key: $stringValue";
         },
-        "added" => function ($el, $spacesAmount, $renderFunc) {
+        "added" => function ($el, $spacesAmount) {
             ["key" => $key, "newValue" => $value] = $el;
             $spaces = str_repeat(" ", $spacesAmount);
             $stringValue = toString($value, $spacesAmount);
             return "$spaces+ $key: $stringValue";
         },
-        "removed" => function ($el, $spacesAmount, $renderFunc) {
+        "removed" => function ($el, $spacesAmount) {
             ["key" => $key, "oldValue" => $value] = $el;
             $spaces = str_repeat(" ", $spacesAmount);
             $stringValue = toString($value, $spacesAmount);
             return "$spaces- $key: $stringValue";
         },
-        "unchanged" => function ($el, $spacesAmount, $renderFunc) {
+        "unchanged" => function ($el, $spacesAmount) {
             ["key" => $key, "value" => $value] = $el;
             $spaces = str_repeat(" ", $spacesAmount);
             $stringValue = toString($value, $spacesAmount);
             return "$spaces  $key: $stringValue";
         },
-        "changed" => function ($el, $spacesAmount, $renderFunc) {
+        "changed" => function ($el, $spacesAmount) {
             ["key" => $key, "newValue" => $newValue, "oldValue" => $oldValue] = $el;
             $spaces = str_repeat(" ", $spacesAmount);
             $stringNewValue = toString($newValue, $spacesAmount);
             $stringOldValue = toString($oldValue, $spacesAmount);
-            return ["$spaces+ $key: $stringNewValue", "$spaces- $key: $oldValue"];
+            return ["$spaces+ $key: $stringNewValue", "$spaces- $key: $stringOldValue"];
         },
     ];
     return $typeMethods[$elementType];

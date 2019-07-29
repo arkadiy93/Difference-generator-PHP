@@ -1,9 +1,37 @@
 <?php namespace Gendiff\index;
 
 use Funct\Collection;
-
 use function Gendiff\parsers\getParsingMethod;
-use function Gendiff\renders\index\getRenderMethod;
+use function Gendiff\renders\deepRender\render as deepRendering;
+use function Gendiff\renders\plainRender\render as plainRendering;
+use function Gendiff\renders\jsonRender\render as jsonRendering;
+
+function getRenderMethod($renderType)
+{
+    $renderers = [
+        "pretty" => function ($ast) {
+            return deepRendering($ast);
+        },
+        "plain" => function ($ast) {
+            return plainRendering($ast);
+        },
+        "json" => function ($ast) {
+            return jsonRendering($ast);
+        }
+    ];
+    $renderFun = $renderers[$renderType];
+
+    if (!$renderFun) {
+        throw new \Exception("Format '$renderType' is not supported");
+    }
+
+    return $renderFun;
+}
+
+function normalizeData($data)
+{
+    return array_values($data);
+}
 
 function getFileExtension($file)
 {
@@ -23,7 +51,7 @@ function getAst($firstData, $secondData)
             $currentNode = [
                 "type" => "nested",
                 "key" => $key,
-                "children" => getAst($firstData[$key], $secondData[$key])
+                "children" => getAst($firstData[$key], $secondData[$key]),
             ];
         } elseif (!array_key_exists($key, $firstData)) {
             $currentNode = [
@@ -54,7 +82,7 @@ function getAst($firstData, $secondData)
         return $currentNode;
     }, $allKeys);
 
-    return $ast;
+    return normalizeData($ast);
 }
 
 function genDiff($firstFilePath, $secondFilePath, $format = "pretty")

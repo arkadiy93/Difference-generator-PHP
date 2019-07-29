@@ -15,11 +15,9 @@
         "files": [
           "src/index.php",
           "src/parsers.php",
-          "src/renders/flatRender.php",
           "src/renders/deepRender.php",
           "src/renders/plainRender.php",
-          "src/renders/jsonRender.php",
-          "src/renders/index.php"
+          "src/renders/jsonRender.php"
         ],
         "psr-4": {
             "Php\\Package\\Tests\\": "tests"

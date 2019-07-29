@@ -2,19 +2,19 @@
 
 use Symfony\Component\Yaml\Yaml;
 
-function getParsingMethod($extension)
+function getParsingMethod($dataType)
 {
     $parsers = [
-        "json" => function ($fileContent) {
-            return json_decode($fileContent, true);
+        "json" => function ($data) {
+            return json_decode($data, true);
         },
-        "yml" => function ($fileContent) {
-            return Yaml::parse($fileContent);
+        "yml" => function ($data) {
+            return Yaml::parse($data);
         }
     ];
     
-    if (!isset($parsers[$extension])) {
+    if (!isset($parsers[$dataType])) {
         throw new \Exception("Unsuported file format");
     }
-    return $parsers[$extension];
+    return $parsers[$dataType];
 }

@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use function Gendiff\index\genDiff;
 
-class RenderingTest extends TestCase
+class GendiffTest extends TestCase
 {
     protected $beforeDeepPath;
     protected $afterDeepPath;
