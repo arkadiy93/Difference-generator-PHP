@@ -1,7 +1,7 @@
 <?php namespace Gendiff\tests;
 
 use PHPUnit\Framework\TestCase;
-use function Gendiff\index\genDiff;
+use function Gendiff\differ\genDiff;
 
 class GendiffTest extends TestCase
 {
