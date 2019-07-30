@@ -35,7 +35,7 @@ composer global require arkadiy/php-project2
 ```
 It is possible to use the code as a library as well:
 ```
-use function \Gendiff\index\genDiff;
+use function \Gendiff\genDiff;
 ```
 
 ### Supported config formats

@@ -1,4 +1,4 @@
-<?php namespace Gendiff\differ;
+<?php namespace Gendiff;
 
 use Funct\Collection;
 use function Gendiff\parsers\getParsingMethod;
